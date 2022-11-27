@@ -29,7 +29,7 @@ public class ProveedorDAO {
     private static final String SQL_INSERT = "INSERT INTO proveedores(nombre, apellido_paterno, apellido_materno, telefono, direccion, marca) "
             + " VALUES(?, ?, ?, ?, ?, ?)";
 
-    private static final String SQL_UPDATE = "UPDATE proveedores "
+    private static final String SQL_UPDATE = "UPDATE proveedores"
             + " SET nombre=?, apellido_paterno=?, apellido_materno=?, telefono=?, direccion=?, marca=? WHERE proveedor_id=?";
 
     private static final String SQL_DELETE = "DELETE FROM proveedores WHERE proveedor_id = ?";

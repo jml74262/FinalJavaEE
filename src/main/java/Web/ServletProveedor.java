@@ -65,9 +65,9 @@ public class ServletProveedor extends HttpServlet{
             throws ServletException, IOException {
         //recuperamos el idCliente
         int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
-        Proveedor proveedor = new ProveedorDAO().encontrar(new Proveedor(idProveedor));
-        request.setAttribute("proveedor", proveedor);
-        String jspEditar = "/WEB-INF/paginas/cliente/editarCliente.jsp";
+        Proveedor proveedores = new ProveedorDAO().encontrar(new Proveedor(idProveedor));
+        request.setAttribute("proveedores", proveedores);
+        String jspEditar = "/WEB-INF/Paginas/Proveedor/ModificarProveedor.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
 

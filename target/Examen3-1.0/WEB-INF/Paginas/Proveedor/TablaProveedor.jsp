@@ -33,9 +33,9 @@
                         <td class="text-center">${proveedores.telefono}</td>
                         <td class="text-center">${proveedores.direccion}</td>
                         <td class="text-center">${proveedores.marca}</td>
-                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletProveedor?accion=editar&idVenta=${proveedores.idProveedor}" >
+                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletProveedor?accion=editar&idProveedor=${proveedores.idProveedor}" >
                         <i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
-                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletProveedor?accion=eliminar&idVenta=${proveedores.idProveedor}" >
+                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletProveedor?accion=eliminar&idProveedor=${proveedores.idProveedor}" >
                         <i class="fa-solid fa-trash-can text-danger"></i></a></td>
                     </tr>
                   </c:forEach>
