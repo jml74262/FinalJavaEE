@@ -2,7 +2,9 @@
 package Web;
 
 import Data.ProductoDAO;
+import Data.ProveedorDAO;
 import Main.Producto;
+import Main.Proveedor;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -37,13 +39,15 @@ public class ServletProducto extends HttpServlet{
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Producto> productos = new ProductoDAO().listar();
+        List<Proveedor> proveedores = new ProveedorDAO().listar();
         System.out.println("productos = " + productos);
         HttpSession sesion = request.getSession();
         sesion.setAttribute("productos", productos);
+        sesion.setAttribute("proveedores", proveedores);
         sesion.setAttribute("totalProductos", productos.size());
         //sesion.setAttribute("saldoTotal", this.calcularSaldoTotal(clientes));
-        //request.getRequestDispatcher("clientes.jsp").forward(request, response);
-        response.sendRedirect("productos.jsp");
+        request.getRequestDispatcher("productos.jsp").forward(request, response);
+        //response.sendRedirect("productos.jsp");
     }
 
     /*private double calcularSaldoTotal(List<Cliente> clientes) {
@@ -57,10 +61,10 @@ public class ServletProducto extends HttpServlet{
     private void editarProducto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idCliente
-        int idProducto = Integer.parseInt(request.getParameter("producto_id"));
-        Producto producto = new ProductoDAO().encontrar(new Producto(idProducto));
-        request.setAttribute("producto", producto);
-        String jspEditar = "/WEB-INF/paginas/producto/editarCliente.jsp";
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+        Producto productos = new ProductoDAO().encontrar(new Producto(idProducto));
+        request.setAttribute("productos", productos);
+        String jspEditar = "/WEB-INF/Paginas/Producto/ModificarProducto.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
 
@@ -90,7 +94,7 @@ public class ServletProducto extends HttpServlet{
         String descripcion = request.getParameter("descripcion");
         float precio = Float.parseFloat(request.getParameter("precio"));
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        String idProveedor = request.getParameter("proveedor_id");
+        String idProveedor = request.getParameter("idProveedor");
         /*double saldo = 0;
         String saldoString = request.getParameter("saldo");
         if (saldoString != null && !"".equals(saldoString)) {
@@ -110,12 +114,12 @@ public class ServletProducto extends HttpServlet{
 
     private void modificarProducto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //recuperamos los valores del formulario editarCliente
-        int idProducto = Integer.parseInt(request.getParameter("producto_id"));
+        //recuperamos los valores del formulario
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
         String descripcion = request.getParameter("descripcion");
         float precio = Float.parseFloat(request.getParameter("precio"));
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        String idProveedor =request.getParameter("proveedor_id");
+        String idProveedor =request.getParameter("idProveedor");
         /*double saldo = 0;
         String saldoString = request.getParameter("saldo");
         if (saldoString != null && !"".equals(saldoString)) {
@@ -136,7 +140,7 @@ public class ServletProducto extends HttpServlet{
         private void eliminarProducto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
-        int idProducto = Integer.parseInt(request.getParameter("producto_id"));
+        int idProducto = Integer.parseInt(request.getParameter("idProducto"));
      
 
         //Creamos el objeto de cliente (modelo)

@@ -26,7 +26,7 @@ public class ProductoDAO {
     private static final String SQL_SELECT_BY_ID = "SELECT producto_id, descripcion, precio, cantidad, proveedor_id "
             + " FROM productos WHERE producto_id = ?";
 
-    private static final String SQL_INSERT = "INSERT INTO clientes(descripcion, precio, cantidad, proveedor_id) "
+    private static final String SQL_INSERT = "INSERT INTO productos(descripcion, precio, cantidad, proveedor_id) "
             + " VALUES(?, ?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE productos "
