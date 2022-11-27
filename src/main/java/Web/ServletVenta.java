@@ -114,6 +114,7 @@ public class ServletVenta extends HttpServlet{
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);
     }
+    
 
     private void modificarVenta(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -14,6 +14,7 @@
     <body>
      <div id="wrapper">
         <jsp:include page="/WEB-INF/Paginas/Comunes/Cabecera.jsp"/>
+        <jsp:include page="/WEB-INF/Paginas/Proveedor/TablaProveedor.jsp"/>
       </div>
         
         

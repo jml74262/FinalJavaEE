@@ -12,29 +12,33 @@
             <table class="table table-white d-block d-lg-table overflow-scroll" id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-nowrap">Proveedor_Id</th>
-                        <th scope="col" class="text-nowrap">Nombre</th>
-                        <th scope="col">Apellido_Paterno</th>
-                        <th scope="col">Apellido_Materno</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Marca</th>
+                        <th scope="col" class="text-center">Proveedor_Id</th>
+                        <th scope="col" class="text-center">Nombre</th>
+                        <th scope="col" class="text-center">Apellido_Paterno</th>
+                        <th scope="col" class="text-center">Apellido_Materno</th>
+                        <th scope="col" class="text-center">Telefono</th>
+                        <th scope="col" class="text-center">Direccion</th>
+                        <th scope="col" class="text-center">Marca</th>
+                        <th scope="col" class="text-center">Editar</th>
                         <th scope="col" class="text-center">Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <c:forEach var="ventas" items="${ventas}" varStatus="status" >
+                  <c:forEach var="proveedores" items="${proveedores}" varStatus="status" >
                     <tr>
-                        <td>${ventas.idVenta}</td>
-                        <td>${ventas.fechaVenta}</td>
-                        <td>${ventas.idCliente}</td>
-                        <td>${ventas.idProducto}</td>
-                        <td class="text-nowrap">${ventas.cantidad}</td>
-                        <td class="text-nowrap"><fmt:formatNumber value="${ventas.total}" type="currency" /></td>
-                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletVenta?accion=eliminar&idVenta=${ventas.idVenta}" >
+                        <td class="text-center">${proveedores.idProveedor}</td>
+                        <td class="text-center">${proveedores.nombre}</td>
+                        <td class="text-center">${proveedores.apellidoP}</td>
+                        <td class="text-center">${proveedores.apellidoM}</td>
+                        <td class="text-center">${proveedores.telefono}</td>
+                        <td class="text-center">${proveedores.direccion}</td>
+                        <td class="text-center">${proveedores.marca}</td>
+                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletProveedor?accion=editar&idVenta=${proveedores.idProveedor}" >
+                        <i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletProveedor?accion=eliminar&idVenta=${proveedores.idProveedor}" >
                         <i class="fa-solid fa-trash-can text-danger"></i></a></td>
                     </tr>
-                </c:forEach>
+                  </c:forEach>
                 </tbody>
             </table>
         </div>

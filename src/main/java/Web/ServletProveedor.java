@@ -44,13 +44,13 @@ public class ServletProveedor extends HttpServlet{
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Proveedor> proveedores = new ProveedorDAO().listar();
-        System.out.println("clientes = " + proveedores);
+        System.out.println("proveedores = " + proveedores);
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("clientes", proveedores);
-        sesion.setAttribute("totalClientes", proveedores.size());
+        sesion.setAttribute("proveedores", proveedores);
+        sesion.setAttribute("totalProveedores", proveedores.size());
         //sesion.setAttribute("saldoTotal", this.calcularSaldoTotal(clientes));
-        //request.getRequestDispatcher("clientes.jsp").forward(request, response);
-        response.sendRedirect("proveedores.jsp");
+        request.getRequestDispatcher("proveedores.jsp").forward(request, response);
+        //response.sendRedirect("proveedores.jsp");
     }
 
     /*private double calcularSaldoTotal(List<Cliente> clientes) {
@@ -64,9 +64,9 @@ public class ServletProveedor extends HttpServlet{
     private void editarProveedor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idCliente
-        int idProveedor = Integer.parseInt(request.getParameter("proveedor_id"));
+        int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
         Proveedor proveedor = new ProveedorDAO().encontrar(new Proveedor(idProveedor));
-        request.setAttribute("cliente", proveedor);
+        request.setAttribute("proveedor", proveedor);
         String jspEditar = "/WEB-INF/paginas/cliente/editarCliente.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
@@ -120,7 +120,7 @@ public class ServletProveedor extends HttpServlet{
     private void modificarProveedor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
-        int idCliente = Integer.parseInt(request.getParameter("proveedor_id"));
+        int idCliente = Integer.parseInt(request.getParameter("idProveedor"));
         String nombre = request.getParameter("nombre");
         String apellidoP = request.getParameter("apellido_paterno");
         String apellidoM = request.getParameter("apellido_materno");
@@ -147,7 +147,7 @@ public class ServletProveedor extends HttpServlet{
         private void eliminarProveedor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
-        int idProveedor = Integer.parseInt(request.getParameter("proveedor_id"));
+        int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
      
 
         //Creamos el objeto de cliente (modelo)
