@@ -5,7 +5,11 @@
 package Web;
 
 import Data.PedidoDAO;
+import Data.ProductoDAO;
+import Data.ProveedorDAO;
 import Main.Pedido;
+import Main.Producto;
+import Main.Proveedor;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -40,13 +44,17 @@ public class ServletPedido extends HttpServlet {
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Pedido> pedidos = new PedidoDAO().listar();
+        List<Producto> productos = new ProductoDAO().listar();
+        List<Proveedor> proveedores = new ProveedorDAO().listar();
         System.out.println("pedidos = " + pedidos);
         HttpSession sesion = request.getSession();
         sesion.setAttribute("pedidos", pedidos);
+        sesion.setAttribute("productos", productos);
+        sesion.setAttribute("proveedores", proveedores);
         sesion.setAttribute("totalPedidos", pedidos.size());
         //sesion.setAttribute("saldoTotal", this.calcularSaldoTotal(clientes));
-        //request.getRequestDispatcher("clientes.jsp").forward(request, response);
-        response.sendRedirect("pedidos.jsp");
+        request.getRequestDispatcher("pedidos.jsp").forward(request, response);
+        //response.sendRedirect("pedidos.jsp");
     }
 
     /*private double calcularSaldoTotal(List<Cliente> clientes) {
@@ -60,10 +68,10 @@ public class ServletPedido extends HttpServlet {
     private void editarPedido(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idCliente
-        int idPedido = Integer.parseInt(request.getParameter("pedido_id"));
-        Pedido pedido = new PedidoDAO().encontrar(new Pedido(idPedido));
-        request.setAttribute("pedido", pedido);
-        String jspEditar = "/WEB-INF/paginas/producto/editarCliente.jsp";
+        int idPedido = Integer.parseInt(request.getParameter("idPedido"));
+        Pedido pedidos = new PedidoDAO().encontrar(new Pedido(idPedido));
+        request.setAttribute("pedidos", pedidos);
+        String jspEditar = "/WEB-INF/Paginas/Pedido/ModificarPedido.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
 
@@ -90,10 +98,10 @@ public class ServletPedido extends HttpServlet {
     private void insertarPedido(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario agregarCliente
-        String fechaPedido = request.getParameter("fecha_pedido");
+        String fechaPedido = request.getParameter("fechaPedido");
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        String productId =request.getParameter("product_id");
-        String providerId =request.getParameter("provider_id");
+        String productId =request.getParameter("idProducto");
+        String providerId =request.getParameter("idProveedor");
         /*double saldo = 0;
         String saldoString = request.getParameter("saldo");
         if (saldoString != null && !"".equals(saldoString)) {
@@ -114,11 +122,11 @@ public class ServletPedido extends HttpServlet {
     private void modificarPedido(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
-        int idPedido = Integer.parseInt(request.getParameter("pedido_id"));
-        String fechaPedido = request.getParameter("fecha_pedido");
+        int idPedido = Integer.parseInt(request.getParameter("idPedido"));
+        String fechaPedido = request.getParameter("fechaPedido");
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        String productId =request.getParameter("product_id");
-        String providerId =request.getParameter("provider_id");
+        String productId =request.getParameter("idProducto");
+        String providerId =request.getParameter("idProveedor");
         /*double saldo = 0;
         String saldoString = request.getParameter("saldo");
         if (saldoString != null && !"".equals(saldoString)) {
@@ -139,7 +147,7 @@ public class ServletPedido extends HttpServlet {
         private void eliminarPedido(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
-        int idPedido = Integer.parseInt(request.getParameter("pedido_id"));
+        int idPedido = Integer.parseInt(request.getParameter("idPedido"));
      
 
         //Creamos el objeto de cliente (modelo)

@@ -4,16 +4,16 @@
 <div class="row" >
     <div class="container-md container-fluid mt-3">
         <div class="col-md-12" id="proveeagregar">
-            <form action="index.html" method="post">
+            <form action="${pageContext.request.contextPath}/ServletProveedor?accion=insertar" method="POST">
                 <h1>Proveedor</h1>
                 <fieldset>
                     <legend><span class="number">1</span> Agregar Proveedor </legend>
                     <label for="nombre">Nombre</label>
-                    <input type="text" name="Nombre">
+                    <input type="text" name="nombre">
                     <label for="apellido_paterno">Apellido Paterno</label>
-                    <input type="text" name="apellido_Paterno">
+                    <input type="text" name="apellido_paterno">
                     <label for="apellido_materno">Apellido Materno</label>
-                    <input type="text" name="apellido_Materno">
+                    <input type="text" name="apellido_materno">
                     <label for="tel">Telefono </label>
                     <input type="tel" name="telefono">
                     <label for="direccion">Direccion</label>

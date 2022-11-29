@@ -32,10 +32,7 @@
                     <label for="cantidad">Cantidad:</label>
                     <input type="number"  name="cantidad" required>
 
-                    <label for="cliente">Total</label>
-                            <c:forEach var="productos" items="${productos}" varStatus="status" >
-                                <option>${productos.idProducto}-${productos.descripcion}</option>
-                            </c:forEach> 
+                    <label for="total">Total</label>
                     <input type="number"  name="total" required>
                 </fieldset>
 

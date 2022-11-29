@@ -49,8 +49,8 @@ public class ServletCliente extends HttpServlet{
         sesion.setAttribute("clientes", clientes);
         sesion.setAttribute("totalClientes", clientes.size());
         //sesion.setAttribute("saldoTotal", this.calcularSaldoTotal(clientes));
-        //request.getRequestDispatcher("clientes.jsp").forward(request, response);
-        response.sendRedirect("clientes.jsp");
+        request.getRequestDispatcher("clientes.jsp").forward(request, response);
+        //response.sendRedirect("clientes.jsp");
     }
 
     /*private double calcularSaldoTotal(List<Cliente> clientes) {
@@ -64,10 +64,10 @@ public class ServletCliente extends HttpServlet{
     private void editarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idCliente
-        int idCliente = Integer.parseInt(request.getParameter("cliente_id"));
-        Cliente cliente = new ClienteDAO().encontrar(new Cliente(idCliente));
-        request.setAttribute("cliente", cliente);
-        String jspEditar = "/WEB-INF/paginas/cliente/editarCliente.jsp";
+        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+        Cliente clientes = new ClienteDAO().encontrar(new Cliente(idCliente));
+        request.setAttribute("clientes", clientes);
+        String jspEditar = "/WEB-INF/Paginas/Cliente/ModificarCliente.jsp";
         request.getRequestDispatcher(jspEditar).forward(request, response);
     }
 
@@ -119,7 +119,7 @@ public class ServletCliente extends HttpServlet{
     private void modificarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
-        int idCliente = Integer.parseInt(request.getParameter("cliente_id"));
+        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido_paterno");
         String email = request.getParameter("apellido_materno");

@@ -120,7 +120,7 @@ public class ServletProveedor extends HttpServlet{
     private void modificarProveedor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
-        int idCliente = Integer.parseInt(request.getParameter("idProveedor"));
+        int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
         String nombre = request.getParameter("nombre");
         String apellidoP = request.getParameter("apellido_paterno");
         String apellidoM = request.getParameter("apellido_materno");
@@ -134,7 +134,7 @@ public class ServletProveedor extends HttpServlet{
         }*/
 
         //Creamos el objeto de cliente (modelo)
-        Proveedor proveedor = new Proveedor(idCliente, nombre, apellidoP, apellidoM, telefono, direccion, marca);
+        Proveedor proveedor = new Proveedor(idProveedor, nombre, apellidoP, apellidoM, telefono, direccion, marca);
 
         //Modificar el  objeto en la base de datos
         int registrosModificados = new ProveedorDAO().actualizar(proveedor);

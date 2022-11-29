@@ -20,17 +20,17 @@ import java.util.logging.Logger;
  */
 public class PedidoDAO {
             
-    private static final String SQL_SELECT = "SELECT pedido_id, fecha_pedido, cantidad, product_id, provider_id"
+    private static final String SQL_SELECT = "SELECT pedido_id, fecha_pedido, cantidad, producto_id, provider_id"
             + " FROM pedidos";
 
-    private static final String SQL_SELECT_BY_ID = "SELECT pedido_id, fecha_pedido, cantidad, product_id, provider_id"
+    private static final String SQL_SELECT_BY_ID = "SELECT pedido_id, fecha_pedido, cantidad, producto_id, provider_id"
             + " FROM pedidos WHERE pedido_id = ?";
 
-    private static final String SQL_INSERT = "INSERT INTO pedidos(fecha_pedido, cantidad, product_id, provider_id) "
+    private static final String SQL_INSERT = "INSERT INTO pedidos(fecha_pedido, cantidad, producto_id, provider_id) "
             + " VALUES(?, ?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE pedidos "
-            + " SET fecha_pedido=?, cantidad=?, product_id=?, provider_id=? WHERE pedido_id=?";
+            + " SET fecha_pedido=?, cantidad=?, producto_id=?, provider_id=? WHERE pedido_id=?";
 
     private static final String SQL_DELETE = "DELETE FROM pedidos WHERE pedido_id = ?";
 
@@ -48,7 +48,7 @@ public class PedidoDAO {
                 int idPedido = rs.getInt("pedido_id");
                 String fechaPedido = rs.getString("fecha_pedido");
                 int cantidad = rs.getInt("cantidad");
-                String productId = rs.getString("product_id");
+                String productId = rs.getString("producto_id");
                 String providerId = rs.getString("provider_id");
 
                 pedido = new Pedido(idPedido, fechaPedido, cantidad, productId, providerId);
@@ -79,7 +79,7 @@ public class PedidoDAO {
 
             String fechaPedido = rs.getString("fecha_pedido");
             int cantidad = rs.getInt("cantidad");
-            String productId = rs.getString("product_id");
+            String productId = rs.getString("producto_id");
             String providerId = rs.getString("provider_id");
 
             pedido.setFechaPedido(fechaPedido);
