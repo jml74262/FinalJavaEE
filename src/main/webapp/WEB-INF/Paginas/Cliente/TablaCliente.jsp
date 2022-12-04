@@ -18,7 +18,8 @@
                         <th scope="col" class="text-center">Apellido_Materno</th>
                         <th scope="col" class="text-center">Telefono</th>
                         <th scope="col" class="text-center">Correo</th>
-                        <th scope="col" class="text-center">Editar/Borrar</th>
+                        <th scope="col" class="text-center">Editar</th>
+                        <th scope="col" class="text-center">Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +33,7 @@
                         <td class="text-center">${clientes.correo}</td>
                         <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletCliente?accion=editar&idCliente=${clientes.idCliente}" >
                         <i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
-                        <a href="${pageContext.request.contextPath}/ServletCliente?accion=eliminar&idCliente=${clientes.idCliente}" >
+                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletCliente?accion=eliminar&idCliente=${clientes.idCliente}" >
                         <i class="fa-solid fa-trash-can text-danger"></i></a></td>
                     </tr>
                   </c:forEach>

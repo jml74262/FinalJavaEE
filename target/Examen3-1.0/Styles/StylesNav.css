@@ -410,6 +410,10 @@ p{
 .row {
   top: -5%;
 }
+.espacioLoco{
+    margin-top: -7%;
+    margin-bottom: 10%;
+}
 form {
   max-width: 300px;
   margin: 10px auto;

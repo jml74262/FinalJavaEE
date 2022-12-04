@@ -18,7 +18,7 @@
         <div id="wrapper">
             <div class="row" >
                 <div class="container-md container-fluid mt-3" >
-                    <div class="col-md-12" id="producModEli">
+                    <div class="espacioLoco col-md-12" id="producModEli">
                         <form action="${pageContext.request.contextPath}/ServletProducto?accion=modificar&idProducto=${productos.idProducto}" method="POST">
                             <h1>Producto </h1>
                             <fieldset>

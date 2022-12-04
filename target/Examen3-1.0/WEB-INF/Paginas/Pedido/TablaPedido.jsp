@@ -17,7 +17,8 @@
                       <th scope="col" class="text-nowrap">Cantidad</th>
                       <th scope="col" class="text-nowrap">Producto_Id</th>
                       <th scope="col" class="text-nowrap">Proveedor_Id</th>
-                      <th scope="col" class="text-center">Editar/Borrar</th>
+                      <th scope="col" class="text-center">Editar</th>
+                      <th scope="col" class="text-center">Borrar</th>
                         
                     </tr>
                 </thead>
@@ -32,7 +33,7 @@
                         <td>${pedidos.idProveedor}</td>
                         <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletPedido?accion=editar&idPedido=${pedidos.idPedido}">
                         <i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
-                        <a href="${pageContext.request.contextPath}/ServletPedido?accion=eliminar&idPedido=${pedidos.idPedido}" >
+                        <td class="align-middle text-center"><a href="${pageContext.request.contextPath}/ServletPedido?accion=eliminar&idPedido=${pedidos.idPedido}">
                         <i class="fa-solid fa-trash-can text-danger"></i></a></td>
                     </tr>
                 </c:forEach>

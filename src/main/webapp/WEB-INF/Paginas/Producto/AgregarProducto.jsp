@@ -9,11 +9,11 @@
                 <fieldset>
                     <legend><span class="number">1</span> Agregar Producto </legend>
                     <label for="descripcion">Descripcion</label>
-                    <input type="text" name="descripcion">
+                    <input type="text" name="descripcion" required>
                     <label for="precio">Precio </label>
-                    <input type="number" name="precio">
+                    <input type="number" name="precio" required>
                     <label for="cantidad">Cantidad: </label>
-                    <input type="number" name="cantidad">
+                    <input type="number" name="cantidad" required>
                     <label for="idProveedor">Id Proveedor</label>
                     <select name="idProveedor">
                         <optgroup label="Proveedor">
