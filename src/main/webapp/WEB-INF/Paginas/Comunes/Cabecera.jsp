@@ -23,7 +23,7 @@
         <li>
             <a href="${pageContext.request.contextPath}/ServletCliente#clientes">Clientes</span></a>
         </li>
-        <li><a href="#Sesion">Cerrar sesion</a></li>
+        <li><a href="${pageContext.request.contextPath}/index.jsp#Sesion">Cerrar sesion</a></li>
     </ul>
 </nav>
 <div id="page-content-wrapper">

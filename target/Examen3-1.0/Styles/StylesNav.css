@@ -239,7 +239,6 @@ content: "\2b" !important;
 }
 a[href*="#Sesion"]::before {
 content: "\f013" !important;
-color: #42884b;
 }
 /*-------------------------------*/
 /*       Hamburger-Cross         */
