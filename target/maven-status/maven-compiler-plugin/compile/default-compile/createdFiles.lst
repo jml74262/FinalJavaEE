@@ -1,4 +1,5 @@
 Data\PedidoDAO.class
+Web\ServletLogin.class
 Data\ProveedorDAO.class
 Main\Persona.class
 Data\VentaDAO.class

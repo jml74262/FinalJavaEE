@@ -1,7 +1,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="es_MX"/>
+<section  id="actions" >
+    <div class="buto" >
+        <div class="col-md-4">
+            <a href="#clieagregar" class="btn btn-dark "
+               data-toggle="modal" data-target="#clieagregar">
+                Agregar Cliente
+            </a>
+        </div>
+    </div>
+</section>
 <h1 class="mt-4">Cliente</h1>
+ <div class="img">
+        <img width="450" src="Assets/Vaq.png" class="img-responsive" alt="Logo"/>
+    </div>
 <div class="tabla1">
     <div class="card mb-4" >
         <div class="card-header">
