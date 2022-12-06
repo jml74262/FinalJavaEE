@@ -39,7 +39,7 @@
                                 <select  name="producto_id" required value="${ventas.idProducto}">
                                     <optgroup label="Productos">
                                         <c:forEach var="productos" items="${productos}" varStatus="status" >
-                                            <option>${productos.idProducto}-${productos.descripcion}</option>
+                                            <option value="${productos.idProducto}">${productos.idProducto}-${productos.descripcion}</option>
                                         </c:forEach> 
                                     </optgroup>
                                 </select>
@@ -47,12 +47,12 @@
                                 <label for="cantidad">Cantidad:</label>
                                 <input type="number" name="cantidad" required value="${ventas.cantidad}">
 
-                                <label for="cliente">Total</label>
-                                <input type="number"  name="total" required value="${ventas.total}">
+                                
                             </fieldset>
 
 
                             <button type="submit" >Guardar</button >
+                            <button type="button" class="btn btn-secondary" href="${pageContext.request.contextPath}/ServletVenta">Cancelar</button>
 
                         </form>
                     </div>

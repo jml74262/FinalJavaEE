@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/ServletVenta")
-public class ServletVenta extends HttpServlet{
+public class ServletVenta extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -60,7 +61,6 @@ public class ServletVenta extends HttpServlet{
         }
         return saldoTotal;
     }*/
-
     private void editarVenta(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idCliente
@@ -93,29 +93,52 @@ public class ServletVenta extends HttpServlet{
 
     private void insertarVenta(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //recuperamos los valores del formulario agregarCliente
+        HttpSession sesion = request.getSession();
+        //recuperamos los valores del formulario "AgregarVenta"
         String fechaVenta = request.getParameter("fecha_venta");
         String clienteId = request.getParameter("cliente_id");
         String productoId = request.getParameter("producto_id");
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        float total = Float.parseFloat(request.getParameter("total"));
-        /*double saldo = 0;
-        String saldoString = request.getParameter("saldo");
-        if (saldoString != null && !"".equals(saldoString)) {
-            saldo = Double.parseDouble(saldoString);
-        }*/
 
-        //Creamos el objeto de cliente (modelo)
-        Venta venta = new Venta(fechaVenta, clienteId, productoId, cantidad, total);
-        //Insertamos el nuevo objeto en la base de datos
-        int registrosModificados = new VentaDAO().insertar(venta);
-        System.out.println("registrosModificados = " + registrosModificados);
-
-        //Redirigimos hacia accion por default
-        this.accionDefault(request, response);
+        //Obtenemos la info del producto que seleccionamos con el combobox
+        Producto p = new Producto(Integer.parseInt(productoId));
+        List<Producto> productos = new ProductoDAO().listar();
+        for (Producto x : productos) {
+            if (x.getIdProducto() == Integer.parseInt(productoId)) {
+                p = x;
+            }
+        }
+        if (cantidad <= p.getCantidad()) {
+            //Quitamos la cantidad de la venta que acabamos de hacer
+            int aux = p.getCantidad() - cantidad;
+            ProductoDAO po = new ProductoDAO();
+            int y = po.actualizar(new Producto(p.getIdProducto(), p.getDescripcion(), p.getPrecio(), aux, p.getIdProveedor()));
+            //Calculamos el total de la venta
+            float total = cantidad * p.getPrecio();
+            //Creamos el objeto de venta (modelo)
+            Venta venta = new Venta(fechaVenta, clienteId, productoId, cantidad, total);
+            //Insertamos la nueva venta en la base de datos
+            int registrosModificados = new VentaDAO().insertar(venta);
+            System.out.println("registrosModificados = " + registrosModificados);
+            //Redirigimos hacia accion por default
+            this.accionDefault(request, response);
+            System.out.println(p.getCantidad());
+        } else {
+            //Para no hacer la venta, se manda a la accion default solamente
+            this.accionDefault(request, response);
+        }
     }
-    
 
+//    private Producto encontrarProducto(int i){
+//        Producto prop = new Producto(i);
+//        List<Producto> productos = new ProductoDAO().listar();
+//        for(Producto x: productos){
+//            if(x.getIdProducto() == i){
+//                prop = x;
+//            }
+//        }
+//        return prop;
+//    }
     private void modificarVenta(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
@@ -124,28 +147,62 @@ public class ServletVenta extends HttpServlet{
         String clienteId = request.getParameter("cliente_id");
         String productoId = request.getParameter("producto_id");
         int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        float total = Float.parseFloat(request.getParameter("total"));
-        /*double saldo = 0;
-        String saldoString = request.getParameter("saldo");
-        if (saldoString != null && !"".equals(saldoString)) {
-            saldo = Double.parseDouble(saldoString);
-        }*/
 
-        //Creamos el objeto de cliente (modelo)
-        Venta venta = new Venta(idVenta,fechaVenta, clienteId, productoId, cantidad, total);
+        //Obtenemos la info del producto que seleccionamos con el combobox
+        Producto p = new Producto(Integer.parseInt(productoId));
+        List<Producto> productos = new ProductoDAO().listar();
+        for (Producto x : productos) {
+            if (x.getIdProducto() == Integer.parseInt(productoId)) {
+                p = x;
+            }
+        }
+        if (cantidad <= p.getCantidad()) {
+            //Quitamos la cantidad de la venta que acabamos de hacer
+            int aux = p.getCantidad() - cantidad;
+            ProductoDAO po = new ProductoDAO();
+            int y = po.actualizar(new Producto(p.getIdProducto(), p.getDescripcion(), p.getPrecio(), aux, p.getIdProveedor()));
+            //Calculamos el total de la venta
+            float total = cantidad * p.getPrecio();
 
-        //Modificar el  objeto en la base de datos
-        int registrosModificados = new VentaDAO().actualizar(venta);
-        System.out.println("registrosModificados = " + registrosModificados);
+            Venta venta = new Venta(idVenta, fechaVenta, clienteId, productoId, cantidad, total);
 
-        //Redirigimos hacia accion por default
-        this.accionDefault(request, response);
+            //Modificar el  objeto en la base de datos
+            int registrosModificados = new VentaDAO().actualizar(venta);
+            System.out.println("registrosModificados = " + registrosModificados);
+
+            //Redirigimos hacia accion por default
+            this.accionDefault(request, response);
+        }
+        else{
+            //Para no hacer la venta, se manda a la accion default solamente
+            this.accionDefault(request, response);
+        }
     }
-    
-        private void eliminarVenta(HttpServletRequest request, HttpServletResponse response)
+
+    private void eliminarVenta(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
         int idVenta = Integer.parseInt(request.getParameter("idVenta"));
+        //Obtenemos la venta
+        Venta v = new Venta(idVenta);
+        List<Venta> ventas = new VentaDAO().listar();
+        for (Venta z : ventas){
+            if (z.getIdVenta() == idVenta){
+                v = z;
+            }
+        }
+        //Obtenemos la info del producto que seleccionamos con el combobox
+        Producto p = new Producto(Integer.parseInt(v.getIdProducto()));
+        List<Producto> productos = new ProductoDAO().listar();
+        for (Producto x : productos) {
+            if (x.getIdProducto() == Integer.parseInt(v.getIdProducto())) {
+                p = x;
+            }
+        }
+        //Sumamos la cantidad de la venta que acabamos de hacer
+            int aux = p.getCantidad() + v.getCantidad();
+            ProductoDAO po = new ProductoDAO();
+            int y = po.actualizar(new Producto(p.getIdProducto(), p.getDescripcion(), p.getPrecio(), aux, p.getIdProveedor()));
         //Creamos el objeto de cliente (modelo)
         Venta venta = new Venta(idVenta);
         //Eliminamos el  objeto en la base de datos

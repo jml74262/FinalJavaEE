@@ -31,20 +31,19 @@
                                 <select  name="producto_id">
                                     <optgroup label="Productos">
                                         <c:forEach var="productos" items="${productos}" varStatus="status" >
-                                            <option>${productos.idProducto}-${productos.descripcion}</option>
+                                            <option value="${productos.idProducto}">${productos.idProducto}-${productos.descripcion}</option>
                                         </c:forEach> 
                                     </optgroup>
                                 </select>
 
                                 <label for="cantidad">Cantidad:</label>
-                                <input type="number"  name="cantidad" required>
+                                <input type="number"  name="cantidad" required >
+                                <h4>${Error}</h4>
 
-                                <label for="total">Total</label>
-                                <input type="number"  name="total" required>
                             </fieldset>
                             <div class="text-center"> 
                             <button type="submit">Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                         </form>
                     </div>
